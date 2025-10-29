@@ -1,4 +1,6 @@
 const AddUserUseCase = require('../../../../Applications/use_case/AddUserUseCase');
+const ClientError = require('../../../../Commons/exceptions/ClientError');
+const DomainErrorTranslator = require('../../../../Commons/exceptions/DomainErrorTranslator');
 
 class UsersHandler {
   constructor(container) {
@@ -8,7 +10,8 @@ class UsersHandler {
   }
 
   async postUserHandler(request, h) {
-    const addUserUseCase = this._container.getInstance(AddUserUseCase.name);
+    
+      const addUserUseCase = this._container.getInstance(AddUserUseCase.name);
     const addedUser = await addUserUseCase.execute(request.payload);
 
     const response = h.response({
